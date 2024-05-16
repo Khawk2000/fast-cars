@@ -1,41 +1,104 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  
 }
 
-#root {
-  max-width: 1280px;
-  margin: 0;
-  padding: 0;
-  text-align: center;
+:root {
+  --text-color: #242424;
+  --background-color: #fcfcfc;
+  --icon-color: #fcfcfc;
+  --logo-1: #5ba95d;
+  --logo-2: #033f63;
+  --shadow: 0.2;
+}
+
+[data-theme='dark']{
+  --background-color: #242424;
+  --text-color: white;
+  --icon-color: #242424;
+  --logo-1: #F58614;
+  --logo-2: #BABBBC;
+  --shadow: 0.7;
+}
+
+.App {
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .navbar {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  height: 70px;
+  grid-template-columns: 300px 5fr 100px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,var(--shadow));
 }
 
 .logo-container{
   display: flex;
+  text-align: center;
+  margin: 0 10px;
 }
 
-.navbar > h1 {
-  line-height: 70px;
+.logo-name {
+  padding: 0 10px;
+  background: linear-gradient(81deg,var(--logo-2) 12%, var(--logo-1) 91%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-pic {
+  width: 100px;
+  height: 70px;
 }
 
 .search-bar-container{
   display: flex;
+  justify-content: center;
+  justify-self: center;
+  width: 100%;
+  background-color: var(--logo-2);
+  border-radius: 50px;
+  height: 50px;
+  align-self: center;
+}
+
+.search-icon {
+  height: 30px;
+  width: 30px;
+  align-self: center;
+  margin: 0 10px;
+  color: var(--icon-color);
 }
 
 .search-bar-container input {
   width: 100%;
+  height: 30px;
+  font-size: 1rem;
+  align-self: center;
+  margin: 0 10px;
+  background-color: var(--logo-2);
+  outline: none;
+  border: none;
+  color: var(--icon-color);
+}
+
+.search-bar-container input:focus {
+  outline: none;
 }
 
 .light-dark-mode-container {
   font-size: 35px;
-  background-color: white;
-  color: #242424;
+  background-color: var(--logo-2);
+  color: var(--icon-color);
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  justify-self: flex-end;
+  align-self: center;
+  margin: 0 20px;
+  text-align: center;
+  cursor: pointer;
 }
