@@ -5,7 +5,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function Navbar( { changeMode } ) {
-    const [light, setLight] = useState(true);
+    const [light, setLight] = useState(false);
 
     const handleMode = () => {
         setLight(!light)
@@ -22,7 +22,7 @@ function Navbar( { changeMode } ) {
             <input type="text" placeholder='Search Cars'/>
         </div>
         <div className='light-dark-mode-container'>
-            {light ? <HiMoon onClick={() => handleMode(light)}/>:<HiSun onClick={() => handleMode(!light)}/>}
+            {light ? <HiSun onClick={() => handleMode(light)}/>:<HiMoon onClick={() => handleMode(!light)}/>}
         </div>
     </div>
   )
