@@ -4,6 +4,7 @@ import { HiOutlineMagnifyingGlass, HiMoon, HiSun } from 'react-icons/hi2';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
+
 function Navbar( { changeMode } ) {
     const [light, setLight] = useState(false);
 

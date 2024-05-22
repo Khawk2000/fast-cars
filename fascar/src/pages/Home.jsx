@@ -26,14 +26,38 @@ var cars = [
     src: porsche,
     label: 'fast',
     path: '/'
+  },
+  {
+    id: 4,
+    carName: 'Bugatti',
+    src: bugatti,
+    label: 'fast',
+    path: '/'
+  },
+  {
+    id: 5,
+    carName: 'Maserati',
+    src: maserati,
+    label: 'fast',
+    path: '/'
+  },
+  {
+    id: 6,
+    carName: 'Porsche',
+    src: porsche,
+    label: 'fast',
+    path: '/'
   }
 ]
 
 function Home() {
+
+
+
   return (
     <div className="home-container">
       <section className="display-car-container">
-        <h1>Welcome to Fascar Rental Services</h1>
+        <h1 className='display-text'>Welcome to Fascar Rental Services</h1>
       </section>
       <section className="all-cars-with-filters">
         <ul className="car-cards">{cars.map(car =>
