@@ -1,8 +1,12 @@
 const mongoose = require('mongoose')
-const AutoIncrement = require('mongoose-sequence')(mongoose)
+
 
 const carSchema = new mongoose.Schema(
     {
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     make:{
         type: String,
         required: true
