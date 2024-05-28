@@ -37,15 +37,14 @@ const carSchema = new mongoose.Schema(
     },
     firstDate:{
         type: Date,
-        required: true
+        default: null
     },
     lastDate:{
         type: Date,
-        required: true
+        default: null
     },
     booked: {
         type: Boolean,
-        required: true,
         default: false
     }
 }

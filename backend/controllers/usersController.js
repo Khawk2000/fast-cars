@@ -97,7 +97,7 @@ const deleteUser = asyncHandler(async (req, res) => {
         return res.status(400).json({message: 'User ID Required'})
     }
 
-    const car = await Car.findOne({ user: id }).lean().exec()
+    const car = await Car.findOne({ user_id: id }).lean().exec()
     if(car){
         return res.status(400).json({message: 'User has assigned Car'})
     }

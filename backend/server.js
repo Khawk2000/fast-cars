@@ -28,6 +28,8 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./routes/root'))
 
+app.use('/cars', require('./routes/carRoutes'))
+
 app.use('/users', require('./routes/userRoutes'))
 
 app.all('*', (req, res) => {
