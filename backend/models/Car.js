@@ -7,6 +7,10 @@ const carSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    pic: {
+        type: String,
+        required: true
+    },
     make:{
         type: String,
         required: true

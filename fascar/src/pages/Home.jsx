@@ -1,58 +1,22 @@
 
 //Be sure to add filter to main section.
-import bugatti from '../assets/Images/bugatti.jpg'
-import maserati from '../assets/Images/maserati.jpg'
-import porsche from '../assets/Images/porsche.jpg'
+import { useState, useEffect } from 'react'
 import CarCard from "../components/CarCard"
 
-var cars = [
-  {
-    id: 1,
-    carName: 'Bugatti',
-    src: bugatti,
-    label: 'fast',
-    path: '/'
-  },
-  {
-    id: 2,
-    carName: 'Maserati',
-    src: maserati,
-    label: 'fast',
-    path: '/'
-  },
-  {
-    id: 3,
-    carName: 'Porsche',
-    src: porsche,
-    label: 'fast',
-    path: '/'
-  },
-  {
-    id: 4,
-    carName: 'Bugatti',
-    src: bugatti,
-    label: 'fast',
-    path: '/'
-  },
-  {
-    id: 5,
-    carName: 'Maserati',
-    src: maserati,
-    label: 'fast',
-    path: '/'
-  },
-  {
-    id: 6,
-    carName: 'Porsche',
-    src: porsche,
-    label: 'fast',
-    path: '/'
-  }
-]
-
 function Home() {
-
-
+  const [dcars, setDCars] = useState(null)
+  useEffect(() => {
+    const fetchCars = async () => {
+      const response = await fetch('http://localhost:3500/cars')
+      const json = await response.json()
+      if(response.ok){
+        setDCars(json)
+      }else{
+        console.log("Status " + response.status)
+      }
+    }
+    fetchCars()
+  },[])
 
   return (
     <div className="home-container">
@@ -60,10 +24,10 @@ function Home() {
         <h1 className='display-text'>Welcome to Fascar Rental Services</h1>
       </section>
       <section className="all-cars-with-filters">
-        <ul className="car-cards">{cars.map(car =>
-          <CarCard key={car.id} carName={car.carName} src={car.src} label={car.label} path={car.path}/>
+        {dcars && <ul className="car-cards">{dcars.map(dcar =>
+          <CarCard key={dcar._id} make={dcar.make} model={dcar.model} src={dcar.pic} year={dcar.year}/>
         )}
-        </ul>
+        </ul>}
       </section>
     </div>
   )

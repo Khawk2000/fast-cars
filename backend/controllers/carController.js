@@ -40,15 +40,15 @@ const getSingleCar = asyncHandler(async (req, res) => {
 //@route POST /users
 //@access Private
 const createNewCar = asyncHandler(async (req, res) => {
-    const { make, model, year, fueltype, doors, seats, price } = req.body
+    const { pic, make, model, year, fueltype, doors, seats, price } = req.body
 
     //Confirm data
-    if(!make || !model || !year || !fueltype || !doors || !seats || !price ){
+    if(!pic || !make || !model || !year || !fueltype || !doors || !seats || !price ){
         return res.status(400).json({ message: 'All fields are required' })
     }
 
     //Compiling data
-    const carObject = {make, model, year, fueltype, doors, seats, price}
+    const carObject = {pic, make, model, year, fueltype, doors, seats, price}
 
     //Create and store new user
     const car = await Car.create(carObject)
@@ -66,7 +66,7 @@ const createNewCar = asyncHandler(async (req, res) => {
 //@route PATCH /users
 //@access Private
 const updateCar = asyncHandler(async (req, res) => {
-    const { id, make, model, year, fueltype, doors, seats, price, firstDate, lastDate, booked } = req.body
+    const { id, pic, make, model, year, fueltype, doors, seats, price, firstDate, lastDate, booked } = req.body
 
     //Confirm data
     if(!id || !price){
@@ -79,6 +79,7 @@ const updateCar = asyncHandler(async (req, res) => {
         return res.status(400).json({message: "Car not found"})
     }
 
+    if(pic !== undefined) car.pic = pic
     if(make !== undefined) car.make = make
     if(model !== undefined) car.model = model
     if(year !== undefined) car.year = year

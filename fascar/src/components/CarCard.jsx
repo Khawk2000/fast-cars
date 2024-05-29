@@ -10,7 +10,7 @@ function CarCard(props) {
             <img src={props.src} alt='Car-image' className='car-card-image'/>
           </figure>
           <div className="car-card-info">
-            <h5 className="car-card-text">{props.carName}</h5>
+            <h5 className="car-card-text">{props.year} {props.make} {props.model}</h5>
           </div>
         </Link>
       </li>
@@ -19,7 +19,9 @@ function CarCard(props) {
 }
 
 CarCard.propTypes = {
-    carName: PropTypes.string,
+    make: PropTypes.string,
+    model: PropTypes.string,
+    year: PropTypes.string,
     src: PropTypes.string,
     label: PropTypes.string,
     path: PropTypes.string
