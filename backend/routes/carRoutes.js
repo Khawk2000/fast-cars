@@ -2,11 +2,10 @@ const express = require('express')
 const router = express.Router()
 const carController = require('../controllers/carController')
 
-router.route('/')
-    .get(carController.getAllCars)
-    .get(carController.getSingleCar)
-    .post(carController.createNewCar)
-    .patch(carController.updateCar)
-    .delete(carController.deleteCar)
+router.get('/', carController.getAllCars)
+router.get('/:id', carController.getSingleCar)
+router.post('/', carController.createNewCar)
+router.patch('/:id', carController.updateCar)
+router.delete('/:id', carController.deleteCar)
 
 module.exports = router

@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import Navbar from './components/Navbar'
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
+import SingleCar from './pages/SingleCar';
 
 function App() {
   const [light, setLight] = useState(true)
@@ -17,6 +18,7 @@ function App() {
       <Router>
         <Navbar changeMode={changeMode}/>
         <Routes>
+          <Route path='/:id' Component={SingleCar}/>
           <Route path='/' exact Component={Home}/>
         </Routes>
       </Router>

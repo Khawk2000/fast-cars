@@ -25,7 +25,7 @@ function Home() {
       </section>
       <section className="all-cars-with-filters">
         {dcars && <ul className="car-cards">{dcars.map(dcar =>
-          <CarCard key={dcar._id} make={dcar.make} model={dcar.model} src={dcar.pic} year={dcar.year}/>
+          <CarCard key={dcar._id} make={dcar.make} model={dcar.model} src={dcar.pic} year={dcar.year} path={`/${dcar._id}`}/>
         )}
         </ul>}
       </section>
