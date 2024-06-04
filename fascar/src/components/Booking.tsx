@@ -5,19 +5,25 @@ import { DayPicker } from 'react-day-picker'
 import "react-day-picker/dist/style.css"
 import { addDays } from 'date-fns'
 
-export function Booking() {
+export function Booking({ getDates }) {
     const initialRange: DateRange = {
-        from: new Date(),
-        to: addDays(new Date(), 4)
+        from: addDays(new Date(), 1),
+        to: addDays(new Date(), 2)
     }
-    
+    const today = new Date()
+    today.setDate(today.getDate() + 1)
+
+
     const [range, setRange] = useState<DateRange | undefined>(initialRange);
     
     //fix so that you can show the selected range / extract for database
-    let footer = <p>Pick a range</p>
     if(range){
-        footer = <p>Selected range is</p>
+        getDates(range)
     }
-    const today = new Date()
-    return <DayPicker defaultMonth={new Date()}mode='range' selected={range} onSelect={setRange} disabled={{before: today}}/>;
+    
+    return (
+        <>
+            <DayPicker defaultMonth={new Date()} mode='range' selected={range} onSelect={setRange} disabled={{before: today}}/>
+        </>
+    )
 }

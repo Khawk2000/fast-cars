@@ -5,7 +5,7 @@ const carController = require('../controllers/carController')
 router.get('/', carController.getAllCars)
 router.get('/:id', carController.getSingleCar)
 router.post('/', carController.createNewCar)
-router.patch('/:id', carController.updateCar)
-router.delete('/:id', carController.deleteCar)
+router.patch('/', carController.updateCar)
+router.delete('/', carController.deleteCar)
 
 module.exports = router

@@ -69,7 +69,7 @@ const updateCar = asyncHandler(async (req, res) => {
     const { id, pic, make, model, year, fueltype, doors, seats, price, firstDate, lastDate, booked } = req.body
 
     //Confirm data
-    if(!id || !price){
+    if(!id){
         return res.status(400).json({ message: 'All fields are required'})
     }
 
@@ -89,8 +89,7 @@ const updateCar = asyncHandler(async (req, res) => {
     if(firstDate !== undefined) car.firstDate = firstDate
     if(lastDate !== undefined) car.lastDate = lastDate
     if(booked !== undefined) car.booked = booked
-
-    car.price = price
+    if(price !== undefined) car.price = price
 
     const updatedCar = await car.save()
 

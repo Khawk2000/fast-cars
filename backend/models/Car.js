@@ -40,11 +40,11 @@ const carSchema = new mongoose.Schema(
         required: true
     },
     firstDate:{
-        type: Date,
+        type: String,
         default: null
     },
     lastDate:{
-        type: Date,
+        type: String,
         default: null
     },
     booked: {
