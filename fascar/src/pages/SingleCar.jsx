@@ -79,12 +79,15 @@ function SingleCar() {
     }
  
     //Still getting bad request errors so fix this later
-    const postCarBooking = async () =>{
-        const editCar = { id: car._id, booked: car.booked, firstDate: car.firstDate, lastDate: car.lastDate}
+    const postCarBooking = async () => {
+        const editCar = { id: id, booked: car.booked, firstDate: car.firstDate, lastDate: car.lastDate}
         console.log(editCar)
-        const response = await fetch('http://localhost:3500/cars', {
+        const response = await fetch('http://localhost:3500/cars/' + id, {
             method: 'PATCH',
-            body: JSON.stringify(editCar)
+            body: JSON.stringify(editCar),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
         const json = await response.json()
 
