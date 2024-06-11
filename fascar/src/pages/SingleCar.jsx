@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Booking } from '../components/Booking.tsx'
 import { format } from 'date-fns'
 import Swal from 'sweetalert2'
+import ThreeDCar from '../components/ThreeDCar.jsx'
 
 
 function SingleCar() {
@@ -114,12 +115,15 @@ function SingleCar() {
     }
     return (
         <div className='single-car-container'>
+            
             {!car && <div className='no-car-found-container'>
                 <h1>Sorry no car was found with that information</h1>
                 <button className="go-home" onClick={handleHome}>Return Home</button>
             </div>}
             {car && <div className="single-car-pic-container">
-                <img src={`${car.pic}`} />
+                
+                <img className="car-img"src={`${car.pic}`} />
+                <ThreeDCar carName={car.make}/>
             </div>
             }
             <div className="single-car-info-container">

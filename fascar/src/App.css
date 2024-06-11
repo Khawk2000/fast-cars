@@ -5,6 +5,7 @@
   
 }
 
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -179,6 +180,10 @@
     height: 100%;
     width: 100%;
   }
+  .car-img {
+    transform: scale(0.4);
+    transition: all ease 0.3s;
+  }
 }
 
 @media screen and (min-width: 1100px) {
@@ -189,6 +194,10 @@
     height: 100%;
     width: 100%;
   }
+  .car-img {
+    transform: scale(0.6);
+    transition: all ease 0.3s;
+  }
 }
 
 @media screen and (min-width: 1600px){
@@ -198,6 +207,10 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     height: 100%;
     width: 100%;
+  }
+  .car-img {
+    transform: scale(0.8);
+    transition: all ease 0.3s;
   }
 }
 
@@ -256,4 +269,20 @@
   color: var(--text-color);
   font-size: 18px;
   line-height: 24px;
+}
+
+.single-car-pic-container{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  height: 100%;
+  width: 100%;
+}
+
+.car-img {
+  align-self: center;
+  justify-self: center;
+  border-radius: 15px;
 }
