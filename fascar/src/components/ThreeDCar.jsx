@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 
 
 function ThreeDCar({ carName }) {
-  console.log(carName + 'try this')
   return (
     <>
       <Canvas dpr={[1,2]} shadows={"soft"} camera={{fov: 45}}>
@@ -26,7 +25,7 @@ function ThreeDCar({ carName }) {
 }
 
 ThreeDCar.propTypes = {
-  carName: PropTypes.String
+  carName: PropTypes.string
 }
 
 export default ThreeDCar;

@@ -10,6 +10,7 @@ import ThreeDCar from '../components/ThreeDCar.jsx'
 function SingleCar() {
     const navigate = useNavigate()
     const [car, setCar] = useState(null)
+    const [haveCar, setHaveCar] = useState(false)
     const [dates, setDates] = useState(null)
     const [firstDate, setFirstDate] = useState(null)
     const [lastDate, setLastDate] = useState(null)
@@ -22,6 +23,20 @@ function SingleCar() {
             if (car.booked === true) {
                 if (car.lastDate < tod) {
                     car.booked = false
+                    Swal.fire({
+                        position: 'center',
+                        title: 'Checking Availability',
+                        color: "#d4ba75",
+                        background: "#1d1c1c",
+                        confirmButtonColor: "#7286a0",
+                        icon: "info",
+                        iconColor: "#d4ba75"
+                    }).then((result) =>{
+                        if(result.isConfirmed) {
+                            car.booked = false
+                            postCarBooking()
+                        }
+                    })
                     console.log('no longer booked')
                 } else {
                     console.log('car is booked')
@@ -35,14 +50,14 @@ function SingleCar() {
             const json = await response.json()
             if (response.ok) {
                 setCar(json)
+                setHaveCar(true)
             }
         }
         fetchCar()
-        if (car) {
+        if(haveCar) {
             checkBooked()
         }
-        console.log(car)
-    }, [id, tod])
+    }, [id, tod, haveCar])
 
 
 
@@ -79,7 +94,6 @@ function SingleCar() {
         console.log(car)
     }
  
-    //Still getting bad request errors so fix this later
     const postCarBooking = async () => {
         const editCar = { id: id, booked: car.booked, firstDate: car.firstDate, lastDate: car.lastDate}
         console.log(editCar)
@@ -98,7 +112,7 @@ function SingleCar() {
         if(response.ok){
             console.log(json)
             console.log('Updated car' + car._id)
-            navigate('/')
+            window.location.reload()
         }
     }
 
