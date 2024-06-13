@@ -154,7 +154,7 @@ function SingleCar() {
             </div>
             {car && car.booked === false && <div><Booking getDates={getDates} /></div>}
             {car && car.booked === true && <h2 className='booked-car-text'>Sorry this car is booked until {car.lastDate}</h2>}
-            <button className='book-button' onClick={handleBooking}>Book Car</button>
+            {car && car.booked === false && <button className='book-button' onClick={handleBooking}>Book Car</button>}
 
             <button className='go-home' onClick={handleHome}>Home</button>
         </div>
