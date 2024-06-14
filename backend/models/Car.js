@@ -4,8 +4,8 @@ const mongoose = require('mongoose')
 const carSchema = new mongoose.Schema(
     {
     user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        type: String,
+        unique: true
     },
     pic: {
         type: String,

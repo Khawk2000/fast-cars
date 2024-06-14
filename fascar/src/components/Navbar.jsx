@@ -3,11 +3,13 @@ import lfascar from '../assets/Images/lfascar.png';
 import { HiOutlineMagnifyingGlass, HiMoon, HiSun, HiUser, HiCog6Tooth } from 'react-icons/hi2';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom'
 
 
 function Navbar( { changeMode } ) {
     const [light, setLight] = useState(false);
     const [logged, setLogged] = useState(false);
+    const navigate = useNavigate()
 
 
     const handleMode = () => {
@@ -16,6 +18,7 @@ function Navbar( { changeMode } ) {
     }
 
     const handleLogin = () => {
+        navigate('/auth/login')
         console.log('trying to login')
         setLogged(!logged)
     }
