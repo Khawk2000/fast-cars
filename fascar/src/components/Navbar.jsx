@@ -11,7 +11,6 @@ function Navbar( { changeMode } ) {
     const [logged, setLogged] = useState(false);
     const navigate = useNavigate()
 
-
     const handleMode = () => {
         setLight(!light)
         changeMode(light)

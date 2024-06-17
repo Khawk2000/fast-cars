@@ -1,17 +1,41 @@
 import { useState } from "react"
-import { useLogin } from '../hooks/useLogin'
+import useAuth from "../hooks/useAuth"
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 //Login page
 const Login = () => {
+    const { setAuth } = useAuth()
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const { login, isLoading, error} = useLogin()
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(username, password)
-        await login(username, password)
+        const response = await fetch('http://localhost:3500/auth/login', {
+            method: 'POST',
+            body: JSON.stringify({ username, password }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+
+        const json = await response.json()
+
+        console.log(json)
+
+        if (!response.ok) {
+            console.log('No work')
+        }
+        //FIGURE OUT HOW COOKIE IS STORED AND IMPLEMENT IT HERE
+        if (response.ok) {
+            console.log(`user ${username} has been logged in`)
+            const accessToken = json.accessToken
+            setAuth({ username, password, accessToken })
+            navigate(from, {replace: true})
+        }
     }
 
     return (
@@ -19,21 +43,20 @@ const Login = () => {
             <h3>Login</h3>
 
             <label>Username:</label>
-            <input 
+            <input
                 type='text'
                 onChange={(e) => setUsername(e.target.value)}
                 value={username}
             />
 
             <label>Password:</label>
-            <input 
+            <input
                 type='password'
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
             />
 
-            <button className="login-button" disabled={isLoading}>Login</button>
-            {error && <div className="error">{error}</div>}
+            <button className="login-button">Login</button>
         </form>
     )
 }

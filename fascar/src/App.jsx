@@ -2,9 +2,10 @@ import './App.css'
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SingleCar from './pages/SingleCar';
 import Login from './pages/Login';
+import RequireAuth from './components/RequireAuth'
 
 function App() {
   const [light, setLight] = useState(true)
@@ -17,11 +18,13 @@ function App() {
   return (
     <div className='App' data-theme={light ? 'light' : 'dark'}>
       <Router>
-        <Navbar changeMode={changeMode}/>
+        <Navbar changeMode={changeMode} />
         <Routes>
-          <Route path='/:id' Component={SingleCar}/>
-          <Route path='/auth/login' Component={Login}/>
-          <Route path='/' exact Component={Home}/>
+          <Route path='/auth/login' Component={Login} />
+          <Route element={<RequireAuth />}>
+            <Route path='/:id' Component={SingleCar} />
+            <Route path='/' exact Component={Home} />
+          </Route>
         </Routes>
       </Router>
     </div>

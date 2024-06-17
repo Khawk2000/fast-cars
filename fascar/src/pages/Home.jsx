@@ -1,10 +1,13 @@
 
 //Be sure to add filter to main section.
 import { useState, useEffect } from 'react'
+import useRefreshToken from '../hooks/useRefreshToken'
 import CarCard from "../components/CarCard"
 
 function Home() {
   const [dcars, setDCars] = useState(null)
+  const refresh = useRefreshToken()
+
   useEffect(() => {
     const fetchCars = async () => {
       const response = await fetch('http://localhost:3500/cars')
@@ -29,6 +32,7 @@ function Home() {
         )}
         </ul>}
       </section>
+      <button onClick={() => refresh()}>Refresh</button>
     </div>
   )
 }
