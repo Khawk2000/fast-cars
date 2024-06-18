@@ -1,8 +1,10 @@
 import { useState } from "react"
 import useAuth from "../hooks/useAuth"
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 //Login page
+
+//Need to figure out how cookie can be stored and accessed to get to other pages other than login
 const Login = () => {
     const { setAuth } = useAuth()
 
@@ -23,8 +25,6 @@ const Login = () => {
         })
 
         const json = await response.json()
-
-        console.log(json)
 
         if (!response.ok) {
             console.log('No work')

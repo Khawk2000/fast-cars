@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SingleCar from './pages/SingleCar';
 import Login from './pages/Login';
-import RequireAuth from './components/RequireAuth'
 
 function App() {
   const [light, setLight] = useState(true)
@@ -21,10 +20,8 @@ function App() {
         <Navbar changeMode={changeMode} />
         <Routes>
           <Route path='/auth/login' Component={Login} />
-          <Route element={<RequireAuth />}>
             <Route path='/:id' Component={SingleCar} />
             <Route path='/' exact Component={Home} />
-          </Route>
         </Routes>
       </Router>
     </div>

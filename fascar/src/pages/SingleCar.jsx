@@ -15,12 +15,14 @@ function SingleCar() {
     const [firstDate, setFirstDate] = useState(null)
     const [lastDate, setLastDate] = useState(null)
     const today = new Date()
-    const tod = format(today, "EEEE, MM-dd-yyyy")
+    const tod = format(today, "MM-dd-yyyy")
     const { id } = useParams()
 
     useEffect(() => {
         const checkBooked = async () => {
             if (car.booked === true) {
+                console.log(car.lastDate, tod)
+                console.log(car.lastDate < tod)
                 if (car.lastDate < tod) {
                     car.booked = false
                     Swal.fire({
@@ -120,10 +122,10 @@ function SingleCar() {
         setDates(data)
         if(dates) {
             if (dates.from !== undefined) {
-                setFirstDate(format(dates.from, "EEEE, MM-dd-yyyy"))
+                setFirstDate(format(dates.from, "MM-dd-yyyy"))
             }
             if (dates.to !== undefined) {
-                setLastDate(format(dates.to, "EEEE, MM-dd-yyyy"))
+                setLastDate(format(dates.to, "MM-dd-yyyy"))
             }
         }
     }

@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 
 // @desc Login
-// @route POST /auth
+// @route POST /auth/login
 // @access Public
 const login = asyncHandler(async (req, res) => {
     const { username, password } = req.body
@@ -30,7 +30,7 @@ const login = asyncHandler(async (req, res) => {
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '1m' }
+        { expiresIn: '1s' }
     )
     const refreshToken = jwt.sign(
         { "username": foundUser.username },
@@ -38,12 +38,16 @@ const login = asyncHandler(async (req, res) => {
         { expiresIn: '1d' }
     )
 
+    foundUser.refreshToken = refreshToken;
+    const result = await foundUser.save();
+    console.log(result)
+
     //Create secure cookie with refresh token
     res.cookie('jwt', refreshToken, {
         httpOnly: true, //accessible only by web server
         secure: true, //https
         sameSite: 'None', //cross-site cookie
-        maxAge: 7 * 24 * 60 * 60 * 1000 //cookie expiry: set to match rT
+        maxAge: 24 * 60 * 60 * 1000 //cookie expiry: set to match rT
     })
 
     //Send accessToken containing username
@@ -56,6 +60,7 @@ const login = asyncHandler(async (req, res) => {
 const refresh = asyncHandler(async (req, res) => {
     const cookies = req.cookies
 
+    console.log('before first unauthorized')
     if (!cookies?.jwt) return res.status(401).json({ message: "Unauthorized" })
 
     const refreshToken = cookies.jwt
@@ -68,6 +73,7 @@ const refresh = asyncHandler(async (req, res) => {
 
             const foundUser = await User.findOne({ username: decoded.username })
 
+            console.log('before second unauthorized')
             if (!foundUser) return res.status(401).json({ message: 'Unauthorized' })
 
             const accessToken = jwt.sign(
@@ -77,7 +83,7 @@ const refresh = asyncHandler(async (req, res) => {
                     }
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '1m' }
+                { expiresIn: '1s' }
             )
 
             res.json({ accessToken })

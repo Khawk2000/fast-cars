@@ -1,12 +1,11 @@
 
 //Be sure to add filter to main section.
 import { useState, useEffect } from 'react'
-import useRefreshToken from '../hooks/useRefreshToken'
 import CarCard from "../components/CarCard"
 
 function Home() {
   const [dcars, setDCars] = useState(null)
-  const refresh = useRefreshToken()
+
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -32,7 +31,6 @@ function Home() {
         )}
         </ul>}
       </section>
-      <button onClick={() => refresh()}>Refresh</button>
     </div>
   )
 }
