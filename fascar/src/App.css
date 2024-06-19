@@ -161,6 +161,15 @@
   -webkit-text-fill-color: transparent;
 }
 
+.car-list-title {
+  padding-bottom: 20px;
+  background: linear-gradient(81deg,var(--logo-2) 12%, var(--logo-1) 91%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-color: var(--text-color);
+  -webkit-text-stroke-width: 1px;
+}
+
 .all-cars-with-filters {
   height: 100%;
   width: 100%;
@@ -271,6 +280,12 @@
   line-height: 24px;
 }
 
+.single-car-container {
+  height: 100%;
+  width: 100vw;
+  background-color: var(--background-color);
+}
+
 .single-car-pic-container{
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -285,4 +300,78 @@
   align-self: center;
   justify-self: center;
   border-radius: 15px;
+}
+
+.single-car-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.car-name-center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.car-name {
+  padding-bottom: 20px;
+}
+
+.car-info {
+  padding-bottom: 10px;
+}
+
+.list-spacer {
+  display: flex;
+  flex-direction: column;
+}
+.icon-space{
+  padding-right: 10px;
+}
+
+.car-features {
+  padding-bottom: 100px;
+  font-size: 20px;
+  list-style: none;
+}
+
+.car-feature {
+  padding-top: 5px;
+}
+
+.center-pricing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 120px;
+  font-size: 20px;
+}
+
+.money {
+  color: #3e9c35;
+}
+
+.rdp-months {
+  transform: scale(1.4);
+}
+
+.book-button {
+  margin-top: 100px;
+}
+
+.home-button-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.go-home {
+  transform: scale(2);
 }

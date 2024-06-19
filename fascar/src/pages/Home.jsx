@@ -26,6 +26,7 @@ function Home() {
         <h1 className='display-text'>Welcome to Fascar Rental Services</h1>
       </section>
       <section className="all-cars-with-filters">
+        <h1 className="car-list-title">Some of our best</h1>
         {dcars && <ul className="car-cards">{dcars.map(dcar =>
           <CarCard key={dcar._id} make={dcar.make} model={dcar.model} src={dcar.pic} year={dcar.year} path={`/${dcar._id}`}/>
         )}

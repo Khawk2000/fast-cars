@@ -5,7 +5,7 @@ import { Booking } from '../components/Booking.tsx'
 import { format } from 'date-fns'
 import Swal from 'sweetalert2'
 import ThreeDCar from '../components/ThreeDCar.jsx'
-
+import { GiCarDoor, GiCarSeat, GiGasPump } from 'react-icons/gi';
 
 function SingleCar() {
     const navigate = useNavigate()
@@ -33,8 +33,8 @@ function SingleCar() {
                         confirmButtonColor: "#7286a0",
                         icon: "info",
                         iconColor: "#d4ba75"
-                    }).then((result) =>{
-                        if(result.isConfirmed) {
+                    }).then((result) => {
+                        if (result.isConfirmed) {
                             car.booked = false
                             postCarBooking()
                         }
@@ -56,7 +56,7 @@ function SingleCar() {
             }
         }
         fetchCar()
-        if(haveCar) {
+        if (haveCar) {
             checkBooked()
         }
     }, [id, tod, haveCar])
@@ -80,8 +80,8 @@ function SingleCar() {
             showCancelButton: true,
             confirmButtonText: "Book Now",
             cancelButtonText: "Cancel"
-        }).then((result) =>{
-            if(result.isConfirmed) {
+        }).then((result) => {
+            if (result.isConfirmed) {
                 if (lastDate === '') {
                     car.lastDate = firstDate
                     car.firstDate = ""
@@ -95,9 +95,9 @@ function SingleCar() {
         })
         console.log(car)
     }
- 
+
     const postCarBooking = async () => {
-        const editCar = { id: id, booked: car.booked, firstDate: car.firstDate, lastDate: car.lastDate}
+        const editCar = { id: id, booked: car.booked, firstDate: car.firstDate, lastDate: car.lastDate }
         console.log(editCar)
         const response = await fetch('http://localhost:3500/cars/' + id, {
             method: 'PATCH',
@@ -108,10 +108,10 @@ function SingleCar() {
         })
         const json = await response.json()
 
-        if(!response.ok){
+        if (!response.ok) {
             console.log(json.error)
         }
-        if(response.ok){
+        if (response.ok) {
             console.log(json)
             console.log('Updated car' + car._id)
             window.location.reload()
@@ -120,7 +120,7 @@ function SingleCar() {
 
     const getDates = async (data) => {
         setDates(data)
-        if(dates) {
+        if (dates) {
             if (dates.from !== undefined) {
                 setFirstDate(format(dates.from, "MM-dd-yyyy"))
             }
@@ -131,34 +131,39 @@ function SingleCar() {
     }
     return (
         <div className='single-car-container'>
-            
             {!car && <div className='no-car-found-container'>
                 <h1>Sorry no car was found with that information</h1>
                 <button className="go-home" onClick={handleHome}>Return Home</button>
             </div>}
             {car && <div className="single-car-pic-container">
-                
-                <img className="car-img"src={`${car.pic}`} />
-                <ThreeDCar carName={car.make}/>
+
+                <img className="car-img" src={`${car.pic}`} />
+                <ThreeDCar carName={car.make} />
             </div>
             }
             <div className="single-car-info-container">
                 {car && <div className="single-car-details-container">
-                    <h1 className="car-name">{car.year} {car.make} {car.model} </h1>
+                    <div className="car-name-center"><h1 className="car-name">{car.year} {car.make} {car.model} </h1></div>
                     <h3 className="car-info">This brand new {car.make} just rolled into our lot with plenty of brand new features including:</h3>
-                    <ul className="car-features">
-                        <li className="car-feature">{car.doors} doors</li>
-                        <li className="car-feature">{car.seats} seats</li>
-                        <li className="car-feature">Fuel Type: {car.fueltype}</li>
-                    </ul>
-                    <h2 className='car-pricing'>All for you to rent for the price of ${car.price}/hour</h2>
+                    <div className='list-spacer'>
+                        <ul className="car-features">
+                            <li className="car-feature"><span className='icon-space'><GiCarDoor /></span>{car.doors} doors</li>
+                            <li className="car-feature"><span className='icon-space'><GiCarSeat /></span>{car.seats} seats</li>
+                            <li className="car-feature"><span className='icon-space'><GiGasPump /></span>{car.fueltype}</li>
+                        </ul>
+                    </div>
+                    <div className="center-pricing">
+                        <h2 className='car-pricing'>All for you to rent for the price of <span className="money">${car.price}</span>/day</h2>
+                    </div>
                 </div>}
-            </div>
-            {car && car.booked === false && <div><Booking getDates={getDates} /></div>}
-            {car && car.booked === true && <h2 className='booked-car-text'>Sorry this car is booked until {car.lastDate}</h2>}
-            {car && car.booked === false && <button className='book-button' onClick={handleBooking}>Book Car</button>}
 
-            <button className='go-home' onClick={handleHome}>Home</button>
+                {car && car.booked === false && <div className='calendar-container'><Booking getDates={getDates} /></div>}
+                {car && car.booked === true && <h2 className='booked-car-text'>Sorry this car is booked until {car.lastDate}</h2>}
+                {car && car.booked === false && <button className='book-button' onClick={handleBooking}>Book Car</button>}
+            </div>
+            <div className="home-button-container">
+                <button className='go-home' onClick={handleHome}>Home</button>
+            </div>
         </div>
     )
 }

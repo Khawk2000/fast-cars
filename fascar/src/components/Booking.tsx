@@ -23,7 +23,7 @@ export function Booking({ getDates }) {
     
     return (
         <>
-            <DayPicker defaultMonth={new Date()} mode='range' selected={range} onSelect={setRange} disabled={{before: today}}/>
+            <DayPicker className='calendar' defaultMonth={new Date()} mode='range' selected={range} onSelect={setRange} disabled={{before: today}}/>
         </>
     )
 }

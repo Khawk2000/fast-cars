@@ -4,6 +4,10 @@ import BlueBugatti from '../../public/BlueBugatti.jsx'
 import GrayPorsche from '../../public/Grayporsche.jsx'
 import RedMaserati from '../../public/RedMaserati.jsx'
 import WhiteLambo from '../../public/WhiteLambo.jsx'
+import BeigeNissan from '../../public/BeigeGTR.jsx'
+import GreenBMW from '../../public/GreenBMW.jsx'
+import OliveFord from '../../public/OliveFord.jsx'
+
 import PropTypes from 'prop-types';
 
 
@@ -17,6 +21,9 @@ function ThreeDCar({ carName }) {
             {carName === "Porsche" && <GrayPorsche scale={1}/>}
             {carName === "Maserati" && <RedMaserati scale={1}/>}
             {carName === "Lamborghini" && <WhiteLambo scale={1}/>}
+            {carName === "Nissan" && <BeigeNissan scale={1}/>}
+            {carName === "BMW" && <GreenBMW scale={1}/>}
+            {carName === "Ford" && <OliveFord scale={1}/>}
           </Stage>
         </PresentationControls>
       </Canvas>
