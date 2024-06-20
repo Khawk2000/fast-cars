@@ -1,11 +1,12 @@
 
 //Be sure to add filter to main section.
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import CarCard from "../components/CarCard"
+import { SearchContext } from '../context/SearchBar'
 
 function Home() {
   const [dcars, setDCars] = useState(null)
-
+  const text = useContext(SearchContext)
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -27,7 +28,7 @@ function Home() {
       </section>
       <section className="all-cars-with-filters">
         <h1 className="car-list-title">Some of our best</h1>
-        {dcars && <ul className="car-cards">{dcars.map(dcar =>
+        {dcars && <ul className="car-cards">{dcars.filter(dcar => dcar.make.includes(text) || dcar.make.toLowerCase().includes(text) || dcar.model.includes(text) || dcar.model.toLowerCase().includes(text) || dcar.year.toLowerCase().includes(text)).map(dcar =>
           <CarCard key={dcar._id} make={dcar.make} model={dcar.model} src={dcar.pic} year={dcar.year} path={`/${dcar._id}`}/>
         )}
         </ul>}

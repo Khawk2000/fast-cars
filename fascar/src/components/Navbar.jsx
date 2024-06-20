@@ -1,12 +1,15 @@
 import dfascar from '../assets/Images/FascarLogo.png';
 import lfascar from '../assets/Images/lfascar.png';
 import { HiOutlineMagnifyingGlass, HiMoon, HiSun } from 'react-icons/hi2';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { SearchContext, UpdateSearch } from '../context/SearchBar';
 import PropTypes from 'prop-types';
 
 
 function Navbar( { changeMode } ) {
     const [light, setLight] = useState(false);
+    const text = useContext(SearchContext)
+    const setText = useContext(UpdateSearch)
 
     const handleMode = () => {
         setLight(!light)
@@ -20,7 +23,7 @@ function Navbar( { changeMode } ) {
         </div>
         <div className="search-bar-container">
             <HiOutlineMagnifyingGlass className='search-icon'/>
-            <input type="text" placeholder='Search Cars'/>
+            <input type="text" placeholder='Search Cars' value={text} onChange={(e) => {setText(e.target.value)}}/>
         </div>
         <div className='light-dark-mode-container'>
             {light ? <HiSun onClick={() => handleMode(light)}/>:<HiMoon onClick={() => handleMode(!light)}/>}
