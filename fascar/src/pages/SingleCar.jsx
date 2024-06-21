@@ -7,6 +7,8 @@ import Swal from 'sweetalert2'
 import ThreeDCar from '../components/ThreeDCar.jsx'
 import { GiCarDoor, GiCarSeat, GiGasPump } from 'react-icons/gi';
 
+const BASE = 'https://fascar-api.onrender.com'
+
 function SingleCar() {
     const navigate = useNavigate()
     const [car, setCar] = useState(null)
@@ -42,7 +44,7 @@ function SingleCar() {
             }
         }
         const fetchCar = async () => {
-            const response = await fetch('http://localhost:3500/cars/' + id)
+            const response = await fetch(BASE + '/cars/' + id)
             const json = await response.json()
             if (response.ok) {
                 setCar(json)
@@ -131,7 +133,7 @@ function SingleCar() {
 
     const postCarBooking = async () => {
         const editCar = { id: id, booked: car.booked, firstDate: car.firstDate, lastDate: car.lastDate }
-        const response = await fetch('http://localhost:3500/cars/' + id, {
+        const response = await fetch(BASE + '/cars/' + id, {
             method: 'PATCH',
             body: JSON.stringify(editCar),
             headers: {

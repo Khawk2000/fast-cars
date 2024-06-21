@@ -4,13 +4,15 @@ import { useState, useEffect, useContext } from 'react'
 import CarCard from "../components/CarCard"
 import { SearchContext } from '../context/SearchBar'
 
+const BASE = 'https://fascar-api.onrender.com'
+
 function Home() {
   const [dcars, setDCars] = useState(null)
   const text = useContext(SearchContext)
 
   useEffect(() => {
     const fetchCars = async () => {
-      const response = await fetch('http://localhost:3500/cars')
+      const response = await fetch(BASE + '/cars')
       const json = await response.json()
       if(response.ok){
         setDCars(json)
