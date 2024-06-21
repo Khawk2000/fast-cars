@@ -4,7 +4,6 @@ import Navbar from './components/Navbar'
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SingleCar from './pages/SingleCar';
-import Login from './pages/Login';
 import { SearchContext, UpdateSearch } from './context/SearchBar';
 
 function App() {
@@ -25,7 +24,6 @@ function App() {
           <UpdateSearch.Provider value={setSearch}>
             <Navbar changeMode={changeMode} />
             <Routes>
-              <Route path='/auth/login' Component={Login} />
               <Route path='/:id' Component={SingleCar} />
               <Route path='/' exact Component={Home} />
             </Routes>

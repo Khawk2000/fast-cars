@@ -22,8 +22,6 @@ function SingleCar() {
     useEffect(() => {
         const checkBooked = async () => {
             if (car.booked === true) {
-                console.log(car.lastDate, tod)
-                console.log(car.lastDate < tod)
                 if (car.lastDate < tod) {
                     car.booked = false
                     Swal.fire({
@@ -40,12 +38,7 @@ function SingleCar() {
                             postCarBooking()
                         }
                     })
-                    console.log('no longer booked')
-                } else {
-                    console.log('car is booked')
                 }
-            } else {
-                console.log('car is not booked')
             }
         }
         const fetchCar = async () => {
@@ -83,7 +76,6 @@ function SingleCar() {
             cancelButtonText: "Cancel"
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log(lastDate, firstDate)
                 let fp = car.price * days
                 Swal.fire({
                     position: 'center',
@@ -135,12 +127,10 @@ function SingleCar() {
 
 
         })
-        console.log(car)
     }
 
     const postCarBooking = async () => {
         const editCar = { id: id, booked: car.booked, firstDate: car.firstDate, lastDate: car.lastDate }
-        console.log(editCar)
         const response = await fetch('http://localhost:3500/cars/' + id, {
             method: 'PATCH',
             body: JSON.stringify(editCar),
@@ -154,8 +144,6 @@ function SingleCar() {
             console.log(json.error)
         }
         if (response.ok) {
-            console.log(json)
-            console.log('Updated car' + car._id)
             window.location.reload()
         }
     }
@@ -165,7 +153,6 @@ function SingleCar() {
         var diffMs = dates.to - dates.from
         var diffD = Math.floor(diffMs / 86400000) + 1
         setDays(diffD)
-        console.log(days)
         if (dates) {
             if (dates.from !== undefined) {
                 setFirstDate(format(dates.from, "MM-dd-yyyy"))

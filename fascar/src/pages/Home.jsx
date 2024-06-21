@@ -14,8 +14,6 @@ function Home() {
       const json = await response.json()
       if(response.ok){
         setDCars(json)
-      }else{
-        console.log("Status " + response.status)
       }
     }
     fetchCars()

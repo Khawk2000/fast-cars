@@ -31,7 +31,6 @@ const Login = () => {
         }
         //FIGURE OUT HOW COOKIE IS STORED AND IMPLEMENT IT HERE
         if (response.ok) {
-            console.log(`user ${username} has been logged in`)
             const accessToken = json.accessToken
             setAuth({ username, password, accessToken })
             navigate(from, {replace: true})
