@@ -162,7 +162,7 @@
 }
 
 .car-list-title {
-  padding-bottom: 20px;
+  padding-bottom: 50px;
   background: linear-gradient(81deg,var(--logo-2) 12%, var(--logo-1) 91%);
   background-clip: text;
   -webkit-text-fill-color: transparent;

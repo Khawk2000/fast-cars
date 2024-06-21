@@ -12,6 +12,7 @@ function SingleCar() {
     const [car, setCar] = useState(null)
     const [haveCar, setHaveCar] = useState(false)
     const [dates, setDates] = useState(null)
+    const [days, setDays] = useState()
     const [firstDate, setFirstDate] = useState(null)
     const [lastDate, setLastDate] = useState(null)
     const today = new Date()
@@ -82,16 +83,57 @@ function SingleCar() {
             cancelButtonText: "Cancel"
         }).then((result) => {
             if (result.isConfirmed) {
-                if (lastDate === '') {
-                    car.lastDate = firstDate
-                    car.firstDate = ""
-                } else {
-                    car.firstDate = firstDate
-                    car.lastDate = lastDate
-                }
-                car.booked = true
-                postCarBooking()
+                console.log(lastDate, firstDate)
+                let fp = car.price * days
+                Swal.fire({
+                    position: 'center',
+                    title: 'Confirm Dates',
+                    text: `That will be $${fp}, are you sure you want to confirm?`,
+                    color: "#d4ba75",
+                    background: "#1d1d1c",
+                    confirmButtonColor: "#5ba95d",
+                    cancelButtonColor: 'red',
+                    icon: "warning",
+                    iconColor: "#d4ba75",
+                    showCancelButton: true,
+                    confirmButtonText: "Confirm",
+                    cancelButtonText: "Cancel"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let timerInterval;
+                        Swal.fire({
+                            title: "Thank you for booking!",
+                            html: "Hope you enjoy your rental!!",
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading();
+                                const timer = Swal.getPopup().querySelector("b");
+                                timerInterval = setInterval(() => {
+                                    timer.textContent = `${Swal.getTimerLeft()}`;
+                                }, 100);
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval);
+                            }
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                if (lastDate === '') {
+                                    car.lastDate = firstDate
+                                    car.firstDate = ""
+                                } else {
+                                    car.firstDate = firstDate
+                                    car.lastDate = lastDate
+                                }
+                                car.booked = true
+                                postCarBooking()
+                            }
+                        });
+                    }
+                })
             }
+
+
         })
         console.log(car)
     }
@@ -120,6 +162,10 @@ function SingleCar() {
 
     const getDates = async (data) => {
         setDates(data)
+        var diffMs = dates.to - dates.from
+        var diffD = Math.floor(diffMs / 86400000) + 1
+        setDays(diffD)
+        console.log(days)
         if (dates) {
             if (dates.from !== undefined) {
                 setFirstDate(format(dates.from, "MM-dd-yyyy"))
