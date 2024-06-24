@@ -3,7 +3,7 @@
 import { useState, useEffect, useContext } from 'react'
 import CarCard from "../components/CarCard"
 import { SearchContext } from '../context/SearchBar'
-import Loader from 'react-loader-spinner'
+import { Loader } from 'react-loader-spinner'
 
 const BASE = 'https://fascar-api.onrender.com'
 
