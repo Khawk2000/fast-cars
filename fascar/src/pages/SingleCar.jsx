@@ -146,7 +146,7 @@ function SingleCar() {
             console.log(json.error)
         }
         if (response.ok) {
-            navigate('/cars/' + id)
+            navigate('/' + id)
         }
     }
 

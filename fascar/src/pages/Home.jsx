@@ -3,7 +3,7 @@
 import { useState, useEffect, useContext } from 'react'
 import CarCard from "../components/CarCard"
 import { SearchContext } from '../context/SearchBar'
-import { Loader } from 'react-loader-spinner'
+import { Audio } from 'react-loader-spinner'
 
 const BASE = 'https://fascar-api.onrender.com'
 
@@ -29,7 +29,7 @@ function Home() {
       </section>
       <section className="all-cars-with-filters">
         <h1 className="car-list-title">Best Rental Cars this side of the Mississippi</h1>
-        {!dcars && <h1>LOADING...<Loader /></h1>}
+        {!dcars && <h1>LOADING...<Audio /></h1>}
         {dcars && <ul className="car-cards">{dcars.filter(dcar => dcar.make.includes(text) || dcar.make.toLowerCase().includes(text) || dcar.model.includes(text) || dcar.model.toLowerCase().includes(text) || dcar.year.toLowerCase().includes(text)).map(dcar =>
           <CarCard key={dcar._id} make={dcar.make} model={dcar.model} src={dcar.pic} year={dcar.year} path={`/${dcar._id}`}/>
         )}
